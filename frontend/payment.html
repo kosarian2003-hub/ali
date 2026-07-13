@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسویه‌حساب | خورشید</title>
+<script src="assets/js/theme-init.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: { extend: {
+      colors: { khorshid: { 950:'#081020', 900:'#0F2A4A', 800:'#153A63', 700:'#1B4F8C', 600:'#2668AC', 500:'#3E7CB8', 300:'#8FBBDE', 100:'#E4EEF8', 50:'#F5F9FD' }, sun: { 500:'#F2A83B', 400:'#F5BE64' } },
+      fontFamily: { display: ['Vazirmatn','sans-serif'], body: ['Vazirmatn','sans-serif'] },
+    } },
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  body { font-family: 'Vazirmatn', sans-serif; }
+  .font-mono { font-family: '"IBM Plex Mono"', monospace; }
+  #delivery-map { height: 320px; border-radius: 1rem; z-index: 0; }
+</style>
+</head>
+<body class="bg-khorshid-50 text-khorshid-950 antialiased dark:bg-khorshid-950 dark:text-khorshid-100">
+
+<header class="sticky top-0 z-40 border-b border-khorshid-100/80 bg-khorshid-50/90 backdrop-blur dark:border-white/5 dark:bg-khorshid-950/90">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5">
+    <a href="index.html" class="flex items-center gap-2.5">
+      <span class="flex h-9 w-9 items-center justify-center rounded-full bg-khorshid-700 text-sun-400">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+      </span>
+      <span class="font-display text-lg font-extrabold text-khorshid-900 dark:text-white" data-i18n="brand">خورشید</span>
+    </a>
+    <div class="flex items-center gap-2">
+      <button data-lang-toggle class="rounded-full border border-khorshid-200 px-3 py-1.5 text-xs font-semibold text-khorshid-700 hover:bg-khorshid-100 dark:border-white/10 dark:text-khorshid-200 dark:hover:bg-white/5">
+        <span data-lang-label>English</span>
+      </button>
+      <button data-theme-toggle class="grid h-9 w-9 place-items-center rounded-full border border-khorshid-200 text-sm hover:bg-khorshid-100 dark:border-white/10 dark:hover:bg-white/5">
+        <span data-theme-icon>🌙</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="mx-auto max-w-6xl px-5 py-10">
+  <h1 class="font-display text-2xl font-bold text-khorshid-950 dark:text-white" data-i18n="cart_page.title">تسویه‌حساب و ارسال</h1>
+
+  <div id="checkout-form-wrap" class="mt-8 grid gap-8 lg:grid-cols-5">
+    <!-- LEFT: cart + delivery + customer -->
+    <div class="space-y-6 lg:col-span-3">
+
+      <div class="rounded-2xl border border-khorshid-100 bg-white p-6 dark:border-white/5 dark:bg-khorshid-900/40">
+        <h2 class="font-display text-base font-semibold text-khorshid-900 dark:text-white" data-i18n="cart_page.your_order">سفارش شما</h2>
+        <div id="cart-lines" class="mt-4"></div>
+        <p id="cart-empty" class="hidden py-6 text-center text-sm text-khorshid-500 dark:text-khorshid-400" data-i18n="cart_page.empty_cart">سبد خرید شما خالی است.</p>
+        <a href="products.html" class="mt-2 inline-block text-sm font-semibold text-khorshid-700 dark:text-khorshid-300" data-i18n="cart_page.browse_products">مشاهده محصولات</a>
+      </div>
+
+      <div class="rounded-2xl border border-khorshid-100 bg-white p-6 dark:border-white/5 dark:bg-khorshid-900/40">
+        <h2 class="font-display text-base font-semibold text-khorshid-900 dark:text-white" data-i18n="cart_page.delivery_title">محل تحویل سفارش</h2>
+        <p class="mt-1 text-sm text-khorshid-600 dark:text-khorshid-400" data-i18n="cart_page.delivery_desc">روی نقشه بزنید یا نشانگر را جابه‌جا کنید تا محل دقیق تحویل مشخص شود.</p>
+        <div class="relative mt-4">
+          <div id="delivery-map"></div>
+          <div id="address-confirm-panel" class="hidden absolute inset-x-3 bottom-3 flex items-start gap-2.5 rounded-xl border border-khorshid-100 bg-white/95 p-3.5 text-sm shadow-lg backdrop-blur dark:border-white/10 dark:bg-khorshid-900/95">
+            <span id="address-confirm-status" class="mt-0.5 shrink-0">📍</span>
+            <div class="min-w-0">
+              <p class="text-[11px] font-medium text-khorshid-500 dark:text-khorshid-400" data-i18n="cart_page.delivery_confirmed">موقعیت تحویل ثبت شد</p>
+              <p id="address-confirm-text" class="mt-0.5 truncate text-khorshid-900 dark:text-khorshid-100"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form id="checkout-form" class="rounded-2xl border border-khorshid-100 bg-white p-6 dark:border-white/5 dark:bg-khorshid-900/40">
+        <h2 class="font-display text-base font-semibold text-khorshid-900 dark:text-white" data-i18n="cart_page.customer_details">اطلاعات گیرنده</h2>
+        <div class="mt-4 grid gap-4 sm:grid-cols-2">
+          <div>
+            <label class="mb-1.5 block text-xs font-medium text-khorshid-700 dark:text-khorshid-300" data-i18n="auth.first_name">نام</label>
+            <input name="customer_first_name" required class="w-full rounded-xl border border-khorshid-200 bg-transparent px-3.5 py-2.5 text-sm outline-none focus:border-khorshid-500 dark:border-white/10" />
+          </div>
+          <div>
+            <label class="mb-1.5 block text-xs font-medium text-khorshid-700 dark:text-khorshid-300" data-i18n="auth.last_name">نام خانوادگی</label>
+            <input name="customer_last_name" required class="w-full rounded-xl border border-khorshid-200 bg-transparent px-3.5 py-2.5 text-sm outline-none focus:border-khorshid-500 dark:border-white/10" />
+          </div>
+          <div>
+            <label class="mb-1.5 block text-xs font-medium text-khorshid-700 dark:text-khorshid-300" data-i18n="cart_page.phone">شماره تماس</label>
+            <input name="customer_phone" required class="w-full rounded-xl border border-khorshid-200 bg-transparent px-3.5 py-2.5 text-sm outline-none focus:border-khorshid-500 dark:border-white/10" />
+          </div>
+          <div class="sm:col-span-2">
+            <label class="mb-1.5 block text-xs font-medium text-khorshid-700 dark:text-khorshid-300" data-i18n="cart_page.address_label">توضیح نشانی (اختیاری)</label>
+            <input name="address_note" data-i18n-placeholder="cart_page.address_placeholder" class="w-full rounded-xl border border-khorshid-200 bg-transparent px-3.5 py-2.5 text-sm outline-none focus:border-khorshid-500 dark:border-white/10" />
+          </div>
+        </div>
+
+        <!-- ORDER SUMMARY (mobile-visible copy lives here so the form submit button sits with totals on small screens) -->
+        <div id="cart-summary" class="mt-6 space-y-2 border-t border-khorshid-100 pt-5 text-sm dark:border-white/5 lg:hidden">
+          <div class="flex justify-between text-khorshid-600 dark:text-khorshid-400">
+            <span data-i18n="cart_page.subtotal">جمع کالاها</span><span id="subtotal-amount" class="font-mono"></span>
+          </div>
+          <div class="flex justify-between text-khorshid-600 dark:text-khorshid-400">
+            <span data-i18n="cart_page.shipping">هزینه ارسال</span><span id="shipping-amount" class="font-mono text-emerald-600 dark:text-emerald-400"></span>
+          </div>
+          <div class="flex justify-between border-t border-khorshid-100 pt-2 text-base font-bold text-khorshid-900 dark:border-white/5 dark:text-white">
+            <span data-i18n="cart_page.total">مبلغ قابل پرداخت</span><span id="total-amount" class="font-mono"></span>
+          </div>
+        </div>
+
+        <button id="pay-button" type="submit" class="mt-6 w-full rounded-xl bg-khorshid-700 py-3.5 text-sm font-semibold text-white hover:bg-khorshid-800 lg:hidden" data-i18n="cart_page.pay_button">
+          پرداخت و ثبت نهایی سفارش
+        </button>
+      </form>
+    </div>
+
+    <!-- RIGHT: sticky summary + pay button on large screens -->
+    <div class="hidden lg:col-span-2 lg:block">
+      <div id="cart-summary-desktop" class="sticky top-24 rounded-2xl border border-khorshid-100 bg-white p-6 dark:border-white/5 dark:bg-khorshid-900/40">
+        <h2 class="font-display text-base font-semibold text-khorshid-900 dark:text-white" data-i18n="cart_page.your_order">سفارش شما</h2>
+        <div class="mt-5 space-y-2 text-sm">
+          <div class="flex justify-between text-khorshid-600 dark:text-khorshid-400">
+            <span data-i18n="cart_page.subtotal">جمع کالاها</span><span id="subtotal-amount-d" class="font-mono"></span>
+          </div>
+          <div class="flex justify-between text-khorshid-600 dark:text-khorshid-400">
+            <span data-i18n="cart_page.shipping">هزینه ارسال</span><span id="shipping-amount-d" class="font-mono text-emerald-600 dark:text-emerald-400"></span>
+          </div>
+          <div class="flex justify-between border-t border-khorshid-100 pt-3 text-base font-bold text-khorshid-900 dark:border-white/5 dark:text-white">
+            <span data-i18n="cart_page.total">مبلغ قابل پرداخت</span><span id="total-amount-d" class="font-mono"></span>
+          </div>
+        </div>
+        <button type="submit" form="checkout-form" class="mt-6 w-full rounded-xl bg-khorshid-700 py-3.5 text-sm font-semibold text-white hover:bg-khorshid-800" data-i18n="cart_page.pay_button">
+          پرداخت و ثبت نهایی سفارش
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS STATE -->
+  <div id="payment-success" class="hidden mx-auto mt-10 max-w-md rounded-3xl border border-emerald-200 bg-emerald-50 p-8 text-center dark:border-emerald-500/20 dark:bg-emerald-500/10">
+    <div class="mx-auto grid h-14 w-14 place-items-center rounded-full bg-emerald-500 text-white">
+      <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+    </div>
+    <h2 class="mt-4 font-display text-lg font-bold text-khorshid-950 dark:text-white" data-i18n="cart_page.success_title">پرداخت با موفقیت انجام شد</h2>
+    <p class="mt-2 text-sm text-khorshid-600 dark:text-khorshid-400" data-i18n="cart_page.success_desc">فاکتور شما صادر شد. از خرید شما سپاسگزاریم.</p>
+    <p class="mt-4 font-mono text-sm text-khorshid-700 dark:text-khorshid-300">
+      <span data-i18n="cart_page.invoice_number">شماره فاکتور</span>: <span id="invoice-number"></span>
+    </p>
+    <p class="mt-1 font-mono text-sm font-bold text-khorshid-900 dark:text-white" id="final-total"></p>
+    <a href="index.html" class="mt-6 inline-block rounded-xl bg-khorshid-700 px-6 py-2.5 text-sm font-semibold text-white hover:bg-khorshid-800" data-i18n="cart_page.back_home">بازگشت به صفحه اصلی</a>
+  </div>
+</section>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/map.js"></script>
+<script src="assets/js/payment.js"></script>
+<script>
+  // mirror totals into the desktop sticky summary as well
+  document.addEventListener('khorshid:translated', mirrorTotals);
+  document.addEventListener('DOMContentLoaded', () => setInterval(mirrorTotals, 500));
+  function mirrorTotals() {
+    const ids = ['subtotal-amount', 'shipping-amount', 'total-amount'];
+    ids.forEach(id => {
+      const src = document.getElementById(id);
+      const dst = document.getElementById(id + '-d');
+      if (src && dst) dst.textContent = src.textContent;
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "INV-1001",
+    "order_id": "332ce8a6",
+    "customer": {
+      "first_name": "علی",
+      "last_name": "کوثریان",
+      "name": "علی کوثریان",
+      "phone": "09102623785"
+    },
+    "subtotal": 21900000,
+    "shipping_fee": 0,
+    "total": 21900000,
+    "issued_at": "2026-07-12T19:15:08.914022"
+  },
+  {
+    "id": "INV-1002",
+    "order_id": "471c271b",
+    "customer": {
+      "first_name": "علی",
+      "last_name": "کوثریان",
+      "name": "علی کوثریان",
+      "phone": "01902623785"
+    },
+    "subtotal": 26300000,
+    "shipping_fee": 350000,
+    "total": 26650000,
+    "issued_at": "2026-07-13T16:34:29.610761"
+  },
+  {
+    "id": "INV-1003",
+    "order_id": "f92227cc",
+    "customer": {
+      "first_name": "علی",
+      "last_name": "کوثریان",
+      "name": "علی کوثریان",
+      "phone": "3"
+    },
+    "subtotal": 26300000,
+    "shipping_fee": 350000,
+    "total": 26650000,
+    "issued_at": "2026-07-13T16:35:25.165284"
+  }
+]

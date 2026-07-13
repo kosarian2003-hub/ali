@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خورشید | توزیع و تعمیرات لوازم خانگی</title>
+<meta name="description" content="خورشید، توزیع‌کننده رسمی و مرکز تخصصی تعمیرات لوازم خانگی با گارانتی واقعی و خدمات درب منزل.">
+
+<!-- Must run before Tailwind / first paint, to avoid a theme flash -->
+<script src="assets/js/theme-init.js"></script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          khorshid: { 950:'#081020', 900:'#0F2A4A', 800:'#153A63', 700:'#1B4F8C', 600:'#2668AC', 500:'#3E7CB8', 300:'#8FBBDE', 100:'#E4EEF8', 50:'#F5F9FD' },
+          sun: { 500:'#F2A83B', 400:'#F5BE64' },
+        },
+        fontFamily: {
+          display: ['Vazirmatn', 'sans-serif'],
+          body: ['Vazirmatn', 'sans-serif'],
+          mono: ['"IBM Plex Mono"', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+  body { font-family: 'Vazirmatn', sans-serif; }
+  .font-mono { font-family: '"IBM Plex Mono"', monospace; }
+  .sunrise-glow {
+    background: radial-gradient(circle at 50% 0%, rgba(242,168,59,0.18), transparent 55%),
+                radial-gradient(circle at 85% 15%, rgba(27,79,140,0.25), transparent 45%);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .fade-up { animation: fadeUp .7s ease both; }
+    .fade-up-delay-1 { animation: fadeUp .7s .12s ease both; }
+    .fade-up-delay-2 { animation: fadeUp .7s .24s ease both; }
+  }
+  @keyframes fadeUp { from { opacity:0; transform: translateY(14px);} to { opacity:1; transform:none; } }
+</style>
+</head>
+<body class="bg-khorshid-50 text-khorshid-950 antialiased dark:bg-khorshid-950 dark:text-khorshid-100">
+
+<!-- ============ NAV ============ -->
+<header class="sticky top-0 z-40 border-b border-khorshid-100/80 bg-khorshid-50/90 backdrop-blur dark:border-white/5 dark:bg-khorshid-950/90">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5">
+    <a href="index.html" class="flex items-center gap-2.5">
+      <span class="flex h-9 w-9 items-center justify-center rounded-full bg-khorshid-700 text-sun-400 shadow-sm dark:bg-khorshid-700">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+      </span>
+      <span>
+        <span class="block font-display text-lg font-extrabold tracking-tight text-khorshid-900 dark:text-white" data-i18n="brand">خورشید</span>
+        <span class="block text-[11px] text-khorshid-500 dark:text-khorshid-300" data-i18n="brand_sub">توزیع و تعمیرات لوازم خانگی</span>
+      </span>
+    </a>
+
+    <nav class="hidden items-center gap-7 text-sm font-medium md:flex">
+      <a href="index.html" class="text-khorshid-900 hover:text-khorshid-700 dark:text-khorshid-100" data-i18n="nav.home">خانه</a>
+      <a href="products.html" class="text-khorshid-700/80 hover:text-khorshid-700 dark:text-khorshid-300" data-i18n="nav.products">محصولات</a>
+      <a href="payment.html" class="relative text-khorshid-700/80 hover:text-khorshid-700 dark:text-khorshid-300">
+        <span data-i18n="nav.cart">سبد خرید</span>
+        <span data-cart-count class="hidden absolute -top-2 -end-3 flex h-4 min-w-4 items-center justify-center rounded-full bg-sun-500 px-1 text-[10px] font-bold text-khorshid-950">0</span>
+      </a>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <button data-lang-toggle class="rounded-full border border-khorshid-200 px-3 py-1.5 text-xs font-semibold text-khorshid-700 hover:bg-khorshid-100 dark:border-white/10 dark:text-khorshid-200 dark:hover:bg-white/5">
+        <span data-lang-label>English</span>
+      </button>
+      <button data-theme-toggle class="grid h-9 w-9 place-items-center rounded-full border border-khorshid-200 text-sm hover:bg-khorshid-100 dark:border-white/10 dark:hover:bg-white/5">
+        <span data-theme-icon>🌙</span>
+      </button>
+
+      <a href="login.html" data-auth-guest class="hidden rounded-full px-3 py-1.5 text-sm font-medium text-khorshid-700 hover:text-khorshid-900 sm:inline-block dark:text-khorshid-300" data-i18n="nav.login">ورود</a>
+      <a href="signup.html" data-auth-guest class="hidden rounded-full bg-khorshid-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-khorshid-800 sm:inline-block" data-i18n="nav.signup">ثبت‌نام</a>
+      <div data-auth-user class="hidden items-center gap-2 sm:flex">
+        <span data-user-avatar class="flex h-8 w-8 items-center justify-center rounded-full bg-khorshid-700 text-xs font-bold text-white"></span>
+        <span data-user-name class="max-w-[7rem] truncate text-sm font-medium text-khorshid-800 dark:text-khorshid-200"></span>
+        <button data-logout class="text-xs text-khorshid-500 hover:text-khorshid-800 dark:text-khorshid-400" data-i18n="nav.logout">خروج</button>
+      </div>
+
+      <button data-menu-toggle class="grid h-9 w-9 place-items-center rounded-full border border-khorshid-200 md:hidden dark:border-white/10">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div data-mobile-menu class="hidden border-t border-khorshid-100 px-5 py-4 md:hidden dark:border-white/5">
+    <div class="flex flex-col gap-3 text-sm font-medium">
+      <a href="products.html" data-i18n="nav.products">محصولات</a>
+      <a href="payment.html" data-i18n="nav.cart">سبد خرید</a>
+      <a href="login.html" data-auth-guest data-i18n="nav.login">ورود</a>
+      <a href="signup.html" data-auth-guest data-i18n="nav.signup">ثبت‌نام</a>
+      <div data-auth-user class="hidden items-center gap-2">
+        <span data-user-avatar class="flex h-7 w-7 items-center justify-center rounded-full bg-khorshid-700 text-[11px] font-bold text-white"></span>
+        <span data-user-name class="flex-1 truncate text-sm font-medium"></span>
+        <button data-logout class="text-xs text-rose-500" data-i18n="nav.logout">خروج</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="sunrise-glow relative overflow-hidden border-b border-khorshid-100 dark:border-white/5">
+  <div class="mx-auto grid max-w-7xl gap-10 px-5 py-14 lg:grid-cols-2 lg:items-center lg:py-20">
+    <div class="fade-up">
+      <p class="mb-4 inline-flex items-center gap-2 rounded-full border border-sun-500/40 bg-sun-500/10 px-3 py-1 text-xs font-semibold text-khorshid-800 dark:text-sun-400" data-i18n="hero.eyebrow">
+        بیش از ۱۵ سال کنار خانواده‌های ایرانی
+      </p>
+      <h1 class="font-display text-3xl font-extrabold leading-[1.35] tracking-tight text-khorshid-950 sm:text-4xl lg:text-[2.6rem] dark:text-white" data-i18n="hero.title">
+        لوازم خانه‌ای که می‌شناسیم، تعمیراتی که به آن‌ها اعتماد داریم
+      </h1>
+      <p class="mt-5 max-w-lg text-[15px] leading-8 text-khorshid-700/90 dark:text-khorshid-300" data-i18n="hero.subtitle">
+        خورشید، توزیع‌کننده‌ی رسمی لوازم خانگی و مرکز تعمیرات تخصصی با گارانتی واقعی و خدمات درب منزل.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="products.html" class="rounded-xl bg-khorshid-700 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-khorshid-700/20 transition hover:bg-khorshid-800" data-i18n="hero.cta_primary">مشاهده محصولات</a>
+        <a href="#steps" class="rounded-xl border border-khorshid-200 px-6 py-3 text-sm font-semibold text-khorshid-800 transition hover:bg-khorshid-100 dark:border-white/10 dark:text-khorshid-200 dark:hover:bg-white/5" data-i18n="hero.cta_secondary">درخواست تعمیر</a>
+      </div>
+    </div>
+
+    <div class="fade-up-delay-1">
+      <!-- VIDEO PLACEHOLDER — replace this <div> with a <video> or <iframe> embed -->
+      <div class="relative aspect-video w-full overflow-hidden rounded-3xl border border-khorshid-200/70 bg-khorshid-900 shadow-xl shadow-khorshid-900/10 dark:border-white/10">
+        <div id="hero-video-slot" class="absolute inset-0 flex flex-col items-center justify-center gap-3 text-khorshid-200">
+          <div class="grid h-14 w-14 place-items-center rounded-full bg-white/10 backdrop-blur">
+            <svg viewBox="0 0 24 24" class="h-6 w-6 translate-x-[1px] text-sun-400" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <p class="text-xs text-khorshid-300" data-i18n="hero.video_caption">نگاهی به کارگاه و تیم فنی خورشید</p>
+        </div>
+        <!--
+          To use the actual video, replace the div#hero-video-slot above with, e.g.:
+          <video class="h-full w-full object-cover" autoplay muted loop playsinline poster="assets/img/hero-poster.jpg">
+            <source src="assets/video/hero.mp4" type="video/mp4">
+          </video>
+        -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST STATS ============ -->
+<section class="border-b border-khorshid-100 bg-white dark:border-white/5 dark:bg-khorshid-900/40">
+  <div class="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-5 py-10 sm:grid-cols-4">
+    <div class="text-center">
+      <p class="font-mono text-2xl font-bold text-khorshid-700 dark:text-khorshid-300">۱۵+</p>
+      <p class="mt-1 text-xs text-khorshid-600 dark:text-khorshid-400" data-i18n="trust.years_label">سال تجربه در توزیع و تعمیر</p>
+    </div>
+    <div class="text-center">
+      <p class="font-mono text-2xl font-bold text-khorshid-700 dark:text-khorshid-300">۳۲</p>
+      <p class="mt-1 text-xs text-khorshid-600 dark:text-khorshid-400" data-i18n="trust.branches_label">نمایندگی و مرکز خدمات</p>
+    </div>
+    <div class="text-center">
+      <p class="font-mono text-2xl font-bold text-khorshid-700 dark:text-khorshid-300">۴۰,۰۰۰+</p>
+      <p class="mt-1 text-xs text-khorshid-600 dark:text-khorshid-400" data-i18n="trust.repairs_label">دستگاه تعمیر و بازرسی‌شده</p>
+    </div>
+    <div class="text-center">
+      <p class="font-mono text-2xl font-bold text-khorshid-700 dark:text-khorshid-300">۱۸</p>
+      <p class="mt-1 text-xs text-khorshid-600 dark:text-khorshid-400" data-i18n="trust.warranty_label">گارانتی رسمی روی هر تعمیر</p>
+    </div>
+  </div>
+</section>
+
+<!-- signature divider: sunrise arc -->
+<div class="relative h-10 overflow-hidden">
+  <svg class="absolute -top-8 left-1/2 h-24 w-[140%] -translate-x-1/2 text-sun-500/25 dark:text-sun-500/15" viewBox="0 0 800 100" preserveAspectRatio="none">
+    <path d="M0,100 Q400,-40 800,100" fill="none" stroke="currentColor" stroke-width="2"/>
+  </svg>
+</div>
+
+<!-- ============ SERVICE STEPS (real sequence -> numbering is justified) ============ -->
+<section id="steps" class="mx-auto max-w-7xl px-5 py-16">
+  <div class="max-w-xl">
+    <h2 class="font-display text-2xl font-bold text-khorshid-950 dark:text-white" data-i18n="steps.title">مسیر خدمات، شفاف و قابل پیگیری</h2>
+    <p class="mt-3 text-sm leading-7 text-khorshid-600 dark:text-khorshid-400" data-i18n="steps.subtitle">از سفارش تا نصب، هر مرحله را می‌بینید و می‌دانید دستگاه‌تان کجاست.</p>
+  </div>
+
+  <ol class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <li class="relative rounded-2xl border border-khorshid-100 bg-white p-6 dark:border-white/5 dark:bg-khorshid-900/40">
+      <span class="font-mono text-sm font-semibold text-sun-500">01</span>
+      <h3 class="mt-3 font-display text-base font-semibold text-khorshid-900 dark:text-white" data-i18n="steps.s1_title">ثبت سفارش یا درخواست تعمیر</h3>
+      <p class="mt-2 text-sm leading-6 text-khorshid-600 dark:text-khorshid-400" data-i18n="steps.s1_desc">محصول را انتخاب کنید یا دستگاه معیوب خود را برای بازدید ثبت کنید.</p>
+    </li>
+    <li class="relative rounded-2xl border border-khorshid-100 bg-white p-6 dark:border-white/5 dark:bg-khorshid-900/40">
+      <span class="font-mono text-sm font-semibold text-sun-500">02</span>
+      <h3 class="mt-3 font-display text-base font-semibold text-khorshid-900 dark:text-white" data-i18n="steps.s2_title">زمان‌بندی و بررسی فنی</h3>
+      <p class="mt-2 text-sm leading-6 text-khorshid-600 dark:text-khorshid-400" data-i18n="steps.s2_desc">کارشناس خورشید زمان مناسب را هماهنگ و دستگاه را بررسی می‌کند.</p>
+    </li>
+    <li class="relative rounded-2xl border border-khorshid-100 bg-white p-6 dark:border-white/5 dark:bg-khorshid-900/40">
+      <span class="font-mono text-sm font-semibold text-sun-500">03</span>
+      <h3 class="mt-3 font-display text-base font-semibold text-khorshid-900 dark:text-white" data-i18n="steps.s3_title">ارسال یا مراجعه‌ی تکنسین</h3>
+      <p class="mt-2 text-sm leading-6 text-khorshid-600 dark:text-khorshid-400" data-i18n="steps.s3_desc">محصول درب منزل تحویل داده می‌شود یا تکنسین برای تعمیر مراجعه می‌کند.</p>
+    </li>
+    <li class="relative rounded-2xl border border-khorshid-100 bg-white p-6 dark:border-white/5 dark:bg-khorshid-900/40">
+      <span class="font-mono text-sm font-semibold text-sun-500">04</span>
+      <h3 class="mt-3 font-display text-base font-semibold text-khorshid-900 dark:text-white" data-i18n="steps.s4_title">گارانتی و پشتیبانی</h3>
+      <p class="mt-2 text-sm leading-6 text-khorshid-600 dark:text-khorshid-400" data-i18n="steps.s4_desc">هر خدمت با گارانتی رسمی و پشتیبانی پس از تحویل همراه است.</p>
+    </li>
+  </ol>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-khorshid-100 bg-white dark:border-white/5 dark:bg-khorshid-900/40">
+  <div class="mx-auto grid max-w-7xl gap-8 px-5 py-12 sm:grid-cols-3">
+    <div>
+      <span class="font-display text-lg font-extrabold text-khorshid-900 dark:text-white" data-i18n="brand">خورشید</span>
+      <p class="mt-3 max-w-xs text-sm leading-7 text-khorshid-600 dark:text-khorshid-400" data-i18n="footer.about">خورشید از سال ۱۳۸۸ در کنار خانواده‌های ایرانی، لوازم خانگی با کیفیت را توزیع و تعمیر می‌کند.</p>
+    </div>
+    <div>
+      <h4 class="text-sm font-semibold text-khorshid-900 dark:text-white" data-i18n="footer.quick_links">دسترسی سریع</h4>
+      <div class="mt-3 flex flex-col gap-2 text-sm text-khorshid-600 dark:text-khorshid-400">
+        <a href="products.html" data-i18n="nav.products">محصولات</a>
+        <a href="login.html" data-i18n="nav.login">ورود</a>
+        <a href="signup.html" data-i18n="nav.signup">ثبت‌نام</a>
+      </div>
+    </div>
+    <div>
+      <h4 class="text-sm font-semibold text-khorshid-900 dark:text-white" data-i18n="footer.contact">تماس با ما</h4>
+      <div class="mt-3 flex flex-col gap-2 font-mono text-sm text-khorshid-600 dark:text-khorshid-400">
+        <span data-i18n="footer.phone">۰۲۱-۹۱۰۰۰۰۰۰</span>
+        <span class="font-body" data-i18n="footer.address">تهران، خیابان ولیعصر، ساختمان خورشید</span>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-khorshid-100 px-5 py-5 text-center text-xs text-khorshid-500 dark:border-white/5 dark:text-khorshid-500">
+    <span data-i18n="footer.rights">تمامی حقوق برای شرکت خورشید محفوظ است.</span>
+  </div>
+</footer>
+
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>محصولات | خورشید</title>
+
+<script src="assets/js/theme-init.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          khorshid: { 950:'#081020', 900:'#0F2A4A', 800:'#153A63', 700:'#1B4F8C', 600:'#2668AC', 500:'#3E7CB8', 300:'#8FBBDE', 100:'#E4EEF8', 50:'#F5F9FD' },
+          sun: { 500:'#F2A83B', 400:'#F5BE64' },
+        },
+        fontFamily: {
+          display: ['Vazirmatn', 'sans-serif'],
+          body: ['Vazirmatn', 'sans-serif'],
+        },
+      },
+    },
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  body { font-family: 'Vazirmatn', sans-serif; }
+  .font-mono { font-family: '"IBM Plex Mono"', monospace; }
+</style>
+</head>
+<body class="bg-khorshid-50 text-khorshid-950 antialiased dark:bg-khorshid-950 dark:text-khorshid-100">
+
+<header class="sticky top-0 z-40 border-b border-khorshid-100/80 bg-khorshid-50/90 backdrop-blur dark:border-white/5 dark:bg-khorshid-950/90">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5">
+    <a href="index.html" class="flex items-center gap-2.5">
+      <span class="flex h-9 w-9 items-center justify-center rounded-full bg-khorshid-700 text-sun-400">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+      </span>
+      <span>
+        <span class="block font-display text-lg font-extrabold tracking-tight text-khorshid-900 dark:text-white" data-i18n="brand">خورشید</span>
+        <span class="block text-[11px] text-khorshid-500 dark:text-khorshid-300" data-i18n="brand_sub">توزیع و تعمیرات لوازم خانگی</span>
+      </span>
+    </a>
+    <nav class="hidden items-center gap-7 text-sm font-medium md:flex">
+      <a href="index.html" class="text-khorshid-700/80 hover:text-khorshid-700 dark:text-khorshid-300" data-i18n="nav.home">خانه</a>
+      <a href="products.html" class="text-khorshid-900 dark:text-khorshid-100" data-i18n="nav.products">محصولات</a>
+      <a href="payment.html" class="relative text-khorshid-700/80 hover:text-khorshid-700 dark:text-khorshid-300">
+        <span data-i18n="nav.cart">سبد خرید</span>
+        <span data-cart-count class="hidden absolute -top-2 -end-3 flex h-4 min-w-4 items-center justify-center rounded-full bg-sun-500 px-1 text-[10px] font-bold text-khorshid-950">0</span>
+      </a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <button data-lang-toggle class="rounded-full border border-khorshid-200 px-3 py-1.5 text-xs font-semibold text-khorshid-700 hover:bg-khorshid-100 dark:border-white/10 dark:text-khorshid-200 dark:hover:bg-white/5">
+        <span data-lang-label>English</span>
+      </button>
+      <button data-theme-toggle class="grid h-9 w-9 place-items-center rounded-full border border-khorshid-200 text-sm hover:bg-khorshid-100 dark:border-white/10 dark:hover:bg-white/5">
+        <span data-theme-icon>🌙</span>
+      </button>
+      <a href="login.html" data-auth-guest class="hidden rounded-full px-3 py-1.5 text-sm font-medium text-khorshid-700 hover:text-khorshid-900 sm:inline-block dark:text-khorshid-300" data-i18n="nav.login">ورود</a>
+      <a href="signup.html" data-auth-guest class="hidden rounded-full bg-khorshid-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-khorshid-800 sm:inline-block" data-i18n="nav.signup">ثبت‌نام</a>
+      <div data-auth-user class="hidden items-center gap-2 sm:flex">
+        <span data-user-avatar class="flex h-8 w-8 items-center justify-center rounded-full bg-khorshid-700 text-xs font-bold text-white"></span>
+        <span data-user-name class="max-w-[7rem] truncate text-sm font-medium text-khorshid-800 dark:text-khorshid-200"></span>
+        <button data-logout class="text-xs text-khorshid-500 hover:text-khorshid-800 dark:text-khorshid-400" data-i18n="nav.logout">خروج</button>
+      </div>
+      <button data-menu-toggle class="grid h-9 w-9 place-items-center rounded-full border border-khorshid-200 md:hidden dark:border-white/10">
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div data-mobile-menu class="hidden border-t border-khorshid-100 px-5 py-4 md:hidden dark:border-white/5">
+    <div class="flex flex-col gap-3 text-sm font-medium">
+      <a href="index.html" data-i18n="nav.home">خانه</a>
+      <a href="payment.html" data-i18n="nav.cart">سبد خرید</a>
+      <a href="login.html" data-auth-guest data-i18n="nav.login">ورود</a>
+      <a href="signup.html" data-auth-guest data-i18n="nav.signup">ثبت‌نام</a>
+      <div data-auth-user class="hidden items-center gap-2">
+        <span data-user-avatar class="flex h-7 w-7 items-center justify-center rounded-full bg-khorshid-700 text-[11px] font-bold text-white"></span>
+        <span data-user-name class="flex-1 truncate text-sm font-medium"></span>
+        <button data-logout class="text-xs text-rose-500" data-i18n="nav.logout">خروج</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="mx-auto max-w-7xl px-5 py-10">
+  <div class="flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <h1 class="font-display text-2xl font-bold text-khorshid-950 dark:text-white" data-i18n="products_page.title">محصولات خورشید</h1>
+      <p class="mt-2 text-sm text-khorshid-600 dark:text-khorshid-400" data-i18n="products_page.subtitle">قیمت و موجودی به‌صورت زنده از سیستم انبار دریافت می‌شود.</p>
+    </div>
+    <div class="flex items-center gap-2 rounded-full border border-khorshid-100 bg-white px-3.5 py-2 text-xs font-medium text-khorshid-700 dark:border-white/10 dark:bg-khorshid-900/50 dark:text-khorshid-300">
+      <span id="live-status" class="h-2 w-2 animate-pulse rounded-full bg-emerald-500"></span>
+      <span data-i18n="products_page.live_badge">به‌روزرسانی زنده هر ۱۰ ثانیه</span>
+      <span class="opacity-50">·</span>
+      <span id="last-synced">—</span>
+    </div>
+  </div>
+
+  <div id="product-error" class="hidden mt-8 rounded-2xl border border-rose-200 bg-rose-50 p-5 text-sm text-rose-700 dark:border-rose-500/20 dark:bg-rose-500/10 dark:text-rose-400">
+    <p class="font-semibold" data-i18n="products_page.error_title">ارتباط با سرور برقرار نشد</p>
+    <p class="mt-1" data-i18n="products_page.error_desc">مطمئن شوید بک‌اند (python app.py) در حال اجراست و صفحه از آدرس http://localhost:5000 باز شده، نه با باز کردن مستقیم فایل.</p>
+    <p id="product-error-detail" class="mt-2 font-mono text-xs opacity-80"></p>
+  </div>
+
+  <div id="product-grid" class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <!-- Product cards are generated here dynamically, one per row in products.xlsx -->
+  </div>
+
+  <div id="product-empty" class="hidden mt-16 flex flex-col items-center gap-3 text-center text-khorshid-500 dark:text-khorshid-400">
+    <p data-i18n="products_page.empty">در حال حاضر محصولی برای نمایش وجود ندارد.</p>
+  </div>
+</section>
+
+<footer class="border-t border-khorshid-100 py-8 text-center text-xs text-khorshid-500 dark:border-white/5 dark:text-khorshid-500">
+  <span data-i18n="footer.rights">تمامی حقوق برای شرکت خورشید محفوظ است.</span>
+</footer>
+
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/products.js"></script>
+</body>
+</html>

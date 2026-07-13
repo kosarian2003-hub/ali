@@ -7,11 +7,11 @@
   "steps": {
     "install": {
       "commands": [
-        "pip install -r proj/backend/requirements.txt"
+        "pip install -r backend/requirements.txt"
       ]
     }
   },
   "deploy": {
-    "startCommand": "python proj/backend/app.py"
+    "startCommand": "python backend/app.py"
   }
 }

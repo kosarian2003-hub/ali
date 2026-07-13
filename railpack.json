@@ -7,6 +7,8 @@
   "steps": {
     "install": {
       "commands": [
+        "pwd",
+        "find . -maxdepth 4 -type f",
         "pip install -r backend/requirements.txt"
       ]
     }

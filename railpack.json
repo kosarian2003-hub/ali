@@ -7,11 +7,11 @@
   "steps": {
     "install": {
       "commands": [
-        "pip install -r ali/backend/requirements.txt"
+        "pip install -r backend/requirements.txt"
       ]
     }
   },
   "deploy": {
-    "startCommand": "ali/python backend/app.py"
+    "startCommand": "python backend/app.py"
   }
 }
